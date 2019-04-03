@@ -1,8 +1,9 @@
 package com.inuker.bluetooth;
 
+import android.Manifest;
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.View;
+import android.support.annotation.NonNull;
 import android.widget.TextView;
 
 import com.inuker.bluetooth.library.connect.listener.BluetoothStateListener;
@@ -16,6 +17,9 @@ import com.inuker.bluetooth.view.PullToRefreshFrameLayout;
 import java.util.ArrayList;
 import java.util.List;
 
+import pub.devrel.easypermissions.AfterPermissionGranted;
+import pub.devrel.easypermissions.EasyPermissions;
+
 public class MainActivity extends Activity {
 
     private static final String MAC = "B0:D5:9D:6F:E7:A5";
@@ -27,8 +31,30 @@ public class MainActivity extends Activity {
 
     private List<SearchResult> mDevices;
 
+    //permissions code
+    private final static int RC_PERMS = 110;
+    private final static String[] PERMS = {Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION};
+
+    @AfterPermissionGranted(RC_PERMS)
+    private void methodRequiresPermissions() {
+        if (EasyPermissions.hasPermissions(this, PERMS)) {
+
+        } else {
+            EasyPermissions.requestPermissions(this, "", RC_PERMS, PERMS);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (!EasyPermissions.hasPermissions(this, PERMS)) {
+            EasyPermissions.requestPermissions(this, "", RC_PERMS, PERMS);
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 

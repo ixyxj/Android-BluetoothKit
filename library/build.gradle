@@ -26,8 +26,8 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 }
 
-def siteUrl = 'https://github.com/dingjikerbo/BluetoothKit' // 项目的主页
-def gitUrl = 'https://github.com/dingjikerbo/BluetoothKit.git' // Git仓库的url
+def siteUrl = 'https://github.com/ixyxj/BluetoothKit' // 项目的主页
+def gitUrl = 'https://github.com/ixyxj/BluetoothKit.git' // Git仓库的url
 group = "com.inuker.bluetooth" // Maven Group ID for the artifact，一般填你唯一的包名
 install {
     repositories.mavenInstaller {
@@ -47,9 +47,9 @@ install {
                 }
                 developers {
                     developer {
-                        id 'dingjikerbo'    //填写的一些基本信息
+                        id 'ixyxj'    //填写的一些基本信息
                         name 'inuker'
-                        email 'dingjikerbo@gmail.com'
+                        email 'ixyxj@gmail.com'
                     }
                 }
                 scm {
